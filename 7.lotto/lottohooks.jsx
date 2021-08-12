@@ -38,6 +38,7 @@ const Lotto = memo(() => {
   useEffect(() => {
     //ajax
   }, []);
+  //componentDidMount만 하고싶을떄
 
   const mounted = useRef(false);
   useEffect(() => {
@@ -46,7 +47,7 @@ const Lotto = memo(() => {
     } else {
       //ajax
     }
-  }, []);
+  }, [바뀌는값]);
   //componentDidMount X componentDidUpdate에서만
 
   useEffect(() => {

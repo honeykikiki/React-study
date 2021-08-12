@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { Component, memo } from "react";
 // import React, { PureComponent, memo, useState } from "react";
 
@@ -43,7 +42,6 @@ const Try = memo(({ tryInfo }) => {
   );
 });
 
-=======
 import React, { Component } from "react";
 
 class Try extends Component {
@@ -57,5 +55,4 @@ class Try extends Component {
   }
 }
 
->>>>>>> parent of 26111da (setTimeout)
 export default Try;

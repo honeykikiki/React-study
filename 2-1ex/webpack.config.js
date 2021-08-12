@@ -30,6 +30,7 @@ module.exports = {
               },
             ],
             "@babel/preset-react",
+            // 'stage-0',
           ],
           plugins: ["@babel/plugin-proposal-class-properties", "react-refresh/babel"], //"@babel/plugin-proposal-class-properties"
         },
