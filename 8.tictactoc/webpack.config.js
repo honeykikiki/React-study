@@ -3,7 +3,7 @@ const { webpack } = require("webpack");
 const ReFreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
-  name: "word-relay-setting",
+  name: "TicTocTac",
   mode: "development", // 실서비스:production
   devtool: "eval", // giden-source-map
   resolve: {
@@ -30,12 +30,12 @@ module.exports = {
             ],
             "@babel/preset-react",
           ],
-          plugins: [], // "react-refresh/babel", "@babel/plugin-proposal-class-properties"
+          plugins: ["react-refresh/babel"], // "react-refresh/babel", "@babel/plugin-proposal-class-properties"
         },
       },
     ],
   },
-  // plugins: [new ReFreshWebpackPlugin()],
+  plugins: [new ReFreshWebpackPlugin()],
   output: {
     filename: "app.js",
     path: path.join(__dirname, "dist"),

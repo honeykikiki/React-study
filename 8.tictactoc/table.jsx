@@ -1,17 +1,15 @@
-import React, { useState } from "react";
-import Tr from "./tr";
+import React, { useState, useEffectm, useMemo } from "react";
+import Tr from "./Tr";
 
-const Table = ({ tableData }) => {
+const Table = ({ onClick, tableData, dispatch }) => {
   return (
     <>
       <table>
-        <tbody>
-          {Array(tableData.length)
-            .fill()
-            .map((tr, i) => (
-              <Tr key={i} rowIndex={i} rowData={tableData[i]} />
-            ))}
-        </tbody>
+        {Array(tableData.length)
+          .fill()
+          .map((tr, i) =>
+            useMemo(() => <Tr key={i} dispatch={dispatch} rowIndex={i} rowData={tableData[i]} />, [tableData[i]])
+          )}
       </table>
     </>
   );

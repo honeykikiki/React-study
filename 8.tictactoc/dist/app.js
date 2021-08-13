@@ -10,33 +10,13 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./Ball.jsx":
-/*!******************!*\
-  !*** ./Ball.jsx ***!
-  \******************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nconst Ball = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(({\n  number\n}) => {\n  let background;\n\n  if (number <= 10) {\n    background = \"red\";\n  } else if (number <= 20) {\n    background = \"orange\";\n  } else if (number <= 30) {\n    background = \"yellow\";\n  } else if (number <= 40) {\n    background = \"blue\";\n  } else {\n    background = \"green\";\n  }\n\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"ball\",\n    style: {\n      background\n    }\n  }, number);\n}); // class Ball extends PureComponent {\n//   state = {};\n//   render() {\n//     let background;\n//     if (number <= 10) {\n//       background = \"red\";\n//     } else if (number <= 20) {\n//       background = \"orange\";\n//     } else if (number <= 30) {\n//       background = \"yellow\";\n//     } else if (number <= 40) {\n//       background = \"blue\";\n//     } else {\n//       background = \"green\";\n//     }\n//     return (\n//       <div className=\"ball\" style={{ background }}>\n//         {number}\n//       </div>\n//     );\n//   }\n// }\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Ball);\n\n//# sourceURL=webpack://7.lotto/./Ball.jsx?");
-
-/***/ }),
-
 /***/ "./client.jsx":
 /*!********************!*\
   !*** ./client.jsx ***!
   \********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var _lottohooks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lottohooks */ \"./lottohooks.jsx\");\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_lottohooks__WEBPACK_IMPORTED_MODULE_2__.default, null), document.querySelector(\"#root\"));\n\n//# sourceURL=webpack://7.lotto/./client.jsx?");
-
-/***/ }),
-
-/***/ "./lottohooks.jsx":
-/*!************************!*\
-  !*** ./lottohooks.jsx ***!
-  \************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _Ball__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ball */ \"./Ball.jsx\");\n// import React, { Component } from \"react\";\n\n\n\nfunction getWinNumbers() {\n  console.log(\"getWinNumbers\");\n  const candidate = Array(45).fill().map((v, i) => i + 1);\n  const shuffle = [];\n\n  while (candidate.length > 0) {\n    shuffle.push(candidate.splice(Math.floor(Math.random() * candidate.length), 1)[0]);\n  }\n\n  const bonusNumber = shuffle[shuffle.length - 1];\n  const winNumbers = shuffle.slice(0, 6).sort((p, c) => p - c);\n  return [...winNumbers, bonusNumber];\n}\n\nconst Lotto = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(() => {\n  const lottoNumbers = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => getWinNumbers(), []);\n  const [winNumbers, setWinNumbers] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(lottoNumbers);\n  const [winBalls, setWinBalls] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]);\n  const [bonus, setBonus] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);\n  const [redo, setRedo] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);\n  const timeOuts = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)([]);\n\n  const runTimeOut = () => {\n    for (let i = 0; i < winNumbers.length - 1; i++) {\n      timeOuts.current[i] = setTimeout(() => {\n        setWinBalls(prevState => [...prevState, winNumbers[i]]);\n      }, (i + 1) * 1000);\n    }\n\n    timeOuts.current[6] = setTimeout(() => {\n      setBonus(winNumbers[6]);\n      setRedo(true);\n    }, 7000);\n  };\n\n  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {//ajax\n  }, []);\n  const mounted = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(false);\n  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n    if (!mounted) {\n      mounted.current = true;\n    } else {//ajax\n    }\n  }, []); //componentDidMount X componentDidUpdate에서만\n\n  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n    console.log(react__WEBPACK_IMPORTED_MODULE_0__.useEffect);\n    runTimeOut();\n    return () => {\n      timeOuts.current.map(v => {\n        clearInterval(v);\n      });\n    };\n  }, [timeOuts.current]); // 빈매열이면  componentDidMount ㄷ똑같다\n  // 벼열의 요소가 있으면 componentDidMount값과 componentDidUpdate 둘다수행\n\n  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\n    console.log(\"로또 숫자를 생성합니다.\");\n  }, [winNumbers]); // useEffect(() => {\n  //   runTimeOut();\n  //   if (winBalls.length === 0) {\n  //     runTimeOut();\n  //   }\n  //   return () => {\n  //     timeOuts.current.map((v) => {\n  //       clearInterval(v);\n  //     });\n  //   };\n  // }, []);\n\n  const onClickRedo = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {\n    console.log(winNumbers);\n    setWinNumbers(getWinNumbers());\n    setWinBalls([]);\n    setBonus(null);\n    setRedo(false);\n    timeOuts.current = [];\n  }, [winNumbers]);\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, \"\\uB2F9\\uCCA8\\uC22B\\uC790\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, winBalls.map(v => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Ball__WEBPACK_IMPORTED_MODULE_1__.default, {\n    key: v,\n    number: v\n  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, \"\\uBCF4\\uB108\\uC2A4!\"), bonus && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Ball__WEBPACK_IMPORTED_MODULE_1__.default, {\n    number: bonus,\n    onClick: onClickRedo\n  }), redo && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"button\", {\n    onClick: onClickRedo\n  }, \"\\uD55C\\uBC88\\uB354\"));\n}); // class Lotto extends Component {\n//   state = {\n//     winNumbers: getWinNumbers(), // 당첨 숫자들\n//     winBalls: [],\n//     bonus: null, // 보너스 공\n//     redo: false,\n//   };\n//   timeOuts = [];\n//   componentDidMount() {\n//     this.runTimeOut();\n//   }\n//   componentDidUpdate(prevProps, prevState) {\n//     if (this.state.winBalls.length === 0) {\n//       this.runTimeOut();\n//     }\n//   }\n//   componentWillUnmount() {\n//     this.timeOuts.forEach((v) => {\n//       clearInterval(v);\n//     });\n//   }\n//   render() {\n//     const { winBalls, bonus, redo } = this.state;\n//   }\n// }\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Lotto);\n\n//# sourceURL=webpack://7.lotto/./lottohooks.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var _tictactoc__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tictactoc */ \"./tictactoc.jsx\");\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tictactoc__WEBPACK_IMPORTED_MODULE_2__.default, null), document.querySelector(\"#root\"));\n\n//# sourceURL=webpack://7.lotto/./client.jsx?");
 
 /***/ }),
 
@@ -127,6 +107,46 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ \"./node_modules/scheduler/cjs/scheduler-tracing.development.js\");\n}\n\n//# sourceURL=webpack://7.lotto/./node_modules/scheduler/tracing.js?");
+
+/***/ }),
+
+/***/ "./table.jsx":
+/*!*******************!*\
+  !*** ./table.jsx ***!
+  \*******************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _tr__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tr */ \"./tr.jsx\");\n\n\n\nconst Table = ({\n  onClick,\n  tableData,\n  dispatch\n}) => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"table\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"tbody\", null, Array(tableData.length).fill().map((tr, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_tr__WEBPACK_IMPORTED_MODULE_1__.default, {\n    key: i,\n    rowIndex: i,\n    rowData: tableData[i],\n    dispatch: dispatch\n  })))));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Table);\n\n//# sourceURL=webpack://7.lotto/./table.jsx?");
+
+/***/ }),
+
+/***/ "./td.jsx":
+/*!****************!*\
+  !*** ./td.jsx ***!
+  \****************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _tictactoc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tictactoc */ \"./tictactoc.jsx\");\n\n\nconst Td = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.memo)(({\n  rowIndex,\n  cellIndex,\n  dispatch,\n  cellData\n}) => {\n  const onClickTd = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {\n    console.log(rowIndex, cellIndex);\n    dispatch({\n      type: _tictactoc__WEBPACK_IMPORTED_MODULE_1__.CLICK_CELL,\n      row: rowIndex,\n      cell: cellIndex\n    });\n    dispatch({\n      Type: _tictactoc__WEBPACK_IMPORTED_MODULE_1__.CHANGE_TURN\n    });\n  }, []);\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"td\", {\n    onClick: onClickTd\n  }, cellData);\n});\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Td);\n\n//# sourceURL=webpack://7.lotto/./td.jsx?");
+
+/***/ }),
+
+/***/ "./tictactoc.jsx":
+/*!***********************!*\
+  !*** ./tictactoc.jsx ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"SET_WINNER\": () => (/* binding */ SET_WINNER),\n/* harmony export */   \"CLICK_CELL\": () => (/* binding */ CLICK_CELL),\n/* harmony export */   \"CHANGE_TURN\": () => (/* binding */ CHANGE_TURN),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./table */ \"./table.jsx\");\n\n\nconst initialState = {\n  winner: \"\",\n  turn: \"O\",\n  tableData: [[\"\", \"\", \"\"], [\"\", \"\", \"\"], [\"\", \"\", \"\"]]\n};\nconst SET_WINNER = '\"SET_WINNER';\nconst CLICK_CELL = '\"CLICK_CELL';\nconst CHANGE_TURN = '\"CHANGE_TURN';\n\nconst reducer = (state, action) => {\n  switch (action.type) {\n    case SET_WINNER:\n      // state.winner = action.winner 이렇게 바꾸면 안됨\n      return { ...state,\n        winner: action.winner\n      };\n\n    case CLICK_CELL:\n      const tableData = [...state.tableData];\n      tableData[action.row] = [...tableData[action.row]]; // immer라는 라이브러리로 가독성 해결\n\n      tableData[action.row][action.cell] = state.turn;\n      return { ...state,\n        tableData,\n        recentCell: [action.row, action.cell]\n      };\n\n    case CHANGE_TURN:\n      {\n        return { ...state,\n          turn: state.turn === \"O\" ? \"x\" : \"O\"\n        };\n      }\n  }\n};\n\nconst TicTacToc = () => {\n  const [state, dispatch] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useReducer)(reducer, initialState); // const [winner, setWinner] = useState(\"\");\n  // const [turn, setTurn] = useState(\"\");\n  // const [tableDate, settTbleDate] = useState([\n  //   [\"\", \"\", \"\"],\n  //   [\"\", \"\", \"\"],\n  //   [\"\", \"\", \"\"],\n  // ]);\n\n  const onClickTable = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(() => {\n    dispatch({\n      type: SET_WINNER,\n      winner: \"O\"\n    });\n  }, []);\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_table__WEBPACK_IMPORTED_MODULE_1__.default, {\n    onClick: onClickTable,\n    tableData: state.tableData,\n    dispatch: dispatch\n  }), state.winner && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, state.winner, \"\\uB2D8\\uC758 \\uC2B9\\uB9AC\"));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TicTacToc);\n\n//# sourceURL=webpack://7.lotto/./tictactoc.jsx?");
+
+/***/ }),
+
+/***/ "./tr.jsx":
+/*!****************!*\
+  !*** ./tr.jsx ***!
+  \****************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _td__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./td */ \"./td.jsx\");\n/* harmony import */ var _table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./table */ \"./table.jsx\");\n\n\n\n\nconst Tr = ({\n  rowData,\n  rowIndex,\n  dispatch\n}) => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"tr\", null, Array(rowData.length).fill().map((td, i) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_td__WEBPACK_IMPORTED_MODULE_1__.default, {\n    key: i,\n    dispatch: dispatch,\n    rowIndex: rowIndex,\n    cellIndex: i,\n    cellData: rowData[i]\n  }, \"\"))));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Tr);\n\n//# sourceURL=webpack://7.lotto/./tr.jsx?");
 
 /***/ })
 
