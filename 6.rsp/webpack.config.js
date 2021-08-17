@@ -30,12 +30,12 @@ module.exports = {
             ],
             "@babel/preset-react",
           ],
-          plugins: ["react-refresh/babel"], // "react-refresh/babel", "@babel/plugin-proposal-class-properties"
+          // plugins: ["react-refresh/babel"], // "react-refresh/babel", "@babel/plugin-proposal-class-properties"
         },
       },
     ],
   },
-  plugins: [new ReFreshWebpackPlugin()],
+  // plugins: [new ReFreshWebpackPlugin()],
   output: {
     filename: "app.js",
     path: path.join(__dirname, "dist"),
