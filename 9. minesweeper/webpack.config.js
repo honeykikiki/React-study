@@ -1,11 +1,10 @@
 const path = require("path");
-const { webpack } = require("webpack");
 const ReFreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = {
   name: "TicTocTac",
   mode: "development", // 실서비스:production
-  devtool: "eval", // giden-source-map
+  devtool: "eval", // hidden-source-map
   resolve: {
     extensions: [".js", ".jsx"],
   },
@@ -16,6 +15,7 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?/,
+        // 바벨 설정
         loader: "babel-loader",
         options: {
           presets: [
@@ -30,6 +30,7 @@ module.exports = {
             ],
             "@babel/preset-react",
           ],
+          // 리엑트 자동 컴파일
           plugins: ["react-refresh/babel", "@babel/plugin-proposal-class-properties"], // "react-refresh/babel", "@babel/plugin-proposal-class-properties"
         },
       },

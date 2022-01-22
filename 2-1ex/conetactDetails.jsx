@@ -51,10 +51,22 @@ export default class ContactDetails extends Component {
     const edit = (
       <div>
         <p>
-          <input type="text" name="name" placeholder="name" value={this.state.name} onChange={this.handleChange} />
+          <input
+            type="text"
+            name="name"
+            placeholder="name"
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
         </p>
         <p>
-          <input type="text" name="phone" placeholder="phone" value={this.state.phone} onChange={this.handleChange} />
+          <input
+            type="text"
+            name="phone"
+            placeholder="phone"
+            value={this.state.phone}
+            onChange={this.handleChange}
+          />
         </p>
       </div>
     );
