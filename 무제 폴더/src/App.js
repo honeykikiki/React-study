@@ -1,15 +1,14 @@
-import { createContext } from "react";
+import { useState } from "react";
 
 import "./style/App.css";
 import LoginForm from "./components/LoginForm";
 import MainHome from "./components/MainHome";
 
-const Store = createContext({
-  userId: null,
-  userPw: null,
-});
-
 function App() {
+  const [done, setDone] = useState();
+  const [id, setId] = useState();
+  const [pw, setPw] = useState();
+
   return (
     <>
       <div className="App">
