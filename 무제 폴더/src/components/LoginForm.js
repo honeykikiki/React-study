@@ -4,7 +4,6 @@ import SignUp from "./SignUp";
 
 const LoginForm = () => {
   const [click, setClick] = useState(true);
-
   return (
     <>
       <div className="wrap">

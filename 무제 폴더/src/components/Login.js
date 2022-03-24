@@ -1,23 +1,55 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
+import { UserContext } from "../store";
 
 const Login = ({ set }) => {
-  const pageChange = useCallback(
+  const { setId, setPw, setDone, id, pw } = useContext(UserContext);
+  console.log(id);
+  console.log(pw);
+  const pageChange = useCallback((e) => {
+    e.preventDefault();
+  }, []);
+
+  const passwordChange = useCallback(
+    (e) => {
+      setPw(e.target.value);
+    },
+    [setPw]
+  );
+
+  const emailChange = useCallback(
+    (e) => {
+      setId(e.target.value);
+    },
+    [setId]
+  );
+
+  const submit = useCallback(
     (e) => {
       e.preventDefault();
-      set(false);
+      if (id && pw) {
+        setDone(true);
+        return;
+      }
+      alert("아이디 비밀번호를 작성해주세요!");
     },
-    [set]
+    [id, pw, setDone]
   );
+
   return (
     <>
       <div>
         <h2>Login</h2>
-        <form>
+        <form onSubmit={submit}>
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" placeholder="Enter Email" />
+          <input type="text" id="email" placeholder="Enter Email" onChange={emailChange} />
           <br />
           <label htmlFor="password">Password</label>
-          <input type={"password"} id="password" placeholder="Enter Password" />
+          <input
+            type={"password"}
+            id="password"
+            placeholder="Enter Password"
+            onChange={passwordChange}
+          />
           <br />
           <button className="login">Login</button>
           <span>or</span>

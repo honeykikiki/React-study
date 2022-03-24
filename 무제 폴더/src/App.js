@@ -1,24 +1,14 @@
-import { useState } from "react";
-
 import "./style/App.css";
-import LoginForm from "./components/LoginForm";
-import MainHome from "./components/MainHome";
+import Store from "./store";
+import Main from "./Main";
 
 function App() {
-  const [done, setDone] = useState();
-  const [id, setId] = useState();
-  const [pw, setPw] = useState();
-
   return (
-    <>
+    <Store>
       <div className="App">
-        <div>
-          <LoginForm />
-          {/* <MainHome /> */}
-        </div>
+        <Main />
       </div>
-    </>
+    </Store>
   );
 }
-
 export default App;
