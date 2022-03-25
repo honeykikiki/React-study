@@ -170,3 +170,16 @@ header .log {
   margin-right: 40px;
   align-items: center;
 }
+
+.info {
+  position: absolute;
+  left: 50%;
+  top: 59%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+}
+
+.info p {
+  font-size: 24px;
+}

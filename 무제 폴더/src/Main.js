@@ -5,7 +5,6 @@ import { UserContext } from "./store";
 
 const Main = () => {
   const { done } = useContext(UserContext);
-  console.log(done);
   return (
     <>
       <div>{done ? <MainGome /> : <LoginForm />}</div>
